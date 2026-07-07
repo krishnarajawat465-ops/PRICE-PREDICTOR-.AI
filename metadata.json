@@ -1,0 +1,6 @@
+{
+  "name": "Product Price Finder",
+  "description": "Find the price of any product by pasting its link or searching by its name using Google Search grounded AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

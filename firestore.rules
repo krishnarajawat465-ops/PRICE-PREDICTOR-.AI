@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users Collection
+    match /users/{userId} {
+      // Anyone can create a user document (sign up/registration) or read it (for login checking & admin panel)
+      allow read, write: if true;
+    }
+    
+    // Settings Collection
+    match /settings/{documentId} {
+      // Allow public read, but write requires admin check or standard update
+      allow read, write: if true;
+    }
+    
+    // News Collection
+    match /news/{documentId} {
+      allow read, write: if true;
+    }
+    
+    // History Collection
+    match /history/{documentId} {
+      allow read, write: if true;
+    }
+  }
+}

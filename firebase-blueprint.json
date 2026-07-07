@@ -1,0 +1,111 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information, preferences, and price drop watchlists",
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "User's login alias"
+        },
+        "password": {
+          "type": "string",
+          "description": "User's authentication password"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full display name"
+        },
+        "watchlist": {
+          "type": "array",
+          "description": "Pinned products to monitor for price drops"
+        }
+      },
+      "required": ["username", "name"]
+    },
+    "GlobalSettings": {
+      "title": "Global System Settings",
+      "description": "Admin broadcast announcements and maintenance mode flags",
+      "type": "object",
+      "properties": {
+        "announcement": {
+          "type": "string",
+          "description": "Global announcement marquee message"
+        },
+        "isMaintenance": {
+          "type": "boolean",
+          "description": "Simulated system offline flag"
+        }
+      },
+      "required": ["announcement", "isMaintenance"]
+    },
+    "NewsItem": {
+      "title": "Live Deal News Item",
+      "description": "A live-deal or significant price drop sync item shown on the dashboard",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "originalPrice": {
+          "type": "string"
+        },
+        "newPrice": {
+          "type": "string"
+        },
+        "merchant": {
+          "type": "string"
+        },
+        "savingPercent": {
+          "type": "number"
+        },
+        "category": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "isSynced": {
+          "type": "boolean"
+        },
+        "lastSyncedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "SearchHistory": {
+      "title": "Global Search History",
+      "description": "A single document containing the list of recently queried search queries",
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of search history entries"
+        }
+      },
+      "required": ["items"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User account details and watchlists indexed by email address"
+    },
+    "/settings/global": {
+      "schema": { "$ref": "#/entities/GlobalSettings" },
+      "description": "Global admin broadcast states and system flags"
+    },
+    "/news/{newsId}": {
+      "schema": { "$ref": "#/entities/NewsItem" },
+      "description": "Deals and price drops synced from e-commerce providers"
+    },
+    "/history/search_history": {
+      "schema": { "$ref": "#/entities/SearchHistory" },
+      "description": "Global user search history list"
+    }
+  }
+}
